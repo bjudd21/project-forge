@@ -7,8 +7,6 @@ dist/
 .vercel/
 .next/
 
-# Prisma
-apps/api/prisma/migrations/
 
 # OS
 .DS_Store
