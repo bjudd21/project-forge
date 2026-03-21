@@ -1,0 +1,16 @@
+name: "Technical Reviewer"
+role: "reviewer"
+version: "1.0.0"
+prompt: "./content/prompts/prd-council/core/technical-reviewer.md"
+skills:
+  - "./content/skills/council/technical-review.md"
+stance: "adversarial"
+parameters:
+  temperature: 0.3
+  max_tokens: 4096
+context_budget: 8000
+model_tier: "free"
+input_contract: "./content/contracts/prd-output.schema.md"
+output_contract: "./content/contracts/council-reviewer-output.schema.md"
+description: "Challenges technical feasibility and architecture decisions."
+tags: ["review", "technical", "architecture"]

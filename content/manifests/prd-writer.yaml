@@ -1,0 +1,18 @@
+name: "PRD Writer"
+role: "synthesizer"
+version: "1.0.0"
+prompt: "./content/prompts/prd-development/prd-writer.md"
+skills:
+  - "./content/skills/prd/requirements-engineering.md"
+  - "./content/skills/prd/gov-prd-requirements.md"
+stance: "neutral"
+parameters:
+  temperature: 0.3
+  max_tokens: 8192
+  top_p: 0.9
+context_budget: 12000
+model_tier: "pro"
+input_contract: "./content/contracts/prd-interview-output.schema.md"
+output_contract: "./content/contracts/prd-output.schema.md"
+description: "Synthesizes interview transcript into a complete, structured PRD."
+tags: ["synthesis", "prd", "documentation"]

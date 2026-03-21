@@ -1,0 +1,17 @@
+name: "Security Reviewer"
+role: "reviewer"
+version: "1.0.0"
+prompt: "./content/prompts/prd-council/core/security-reviewer.md"
+skills:
+  - "./content/skills/council/security-review.md"
+  - "./content/skills/council/fisma-compliance-check.md"
+stance: "adversarial"
+parameters:
+  temperature: 0.3
+  max_tokens: 4096
+context_budget: 8000
+model_tier: "free"
+input_contract: "./content/contracts/prd-output.schema.md"
+output_contract: "./content/contracts/council-reviewer-output.schema.md"
+description: "Identifies security risks, compliance gaps, and attack surface concerns."
+tags: ["review", "security", "compliance"]

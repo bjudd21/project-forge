@@ -1,0 +1,16 @@
+name: "Council Chair"
+role: "synthesizer"
+version: "1.0.0"
+prompt: "./content/prompts/prd-council/core/council-chair.md"
+skills:
+  - "./content/skills/council/council-synthesis.md"
+stance: "synthesis"
+parameters:
+  temperature: 0.3
+  max_tokens: 6144
+context_budget: 18000
+model_tier: "pro"
+input_contract: "./content/contracts/council-reviewer-output.schema.md"
+output_contract: "./content/contracts/council-output.schema.md"
+description: "Synthesizes independent reviewer outputs into a unified verdict and revision plan."
+tags: ["synthesis", "council", "verdict"]
