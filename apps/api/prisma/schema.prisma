@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String         @id
+  clerkId          String         @unique
+  email            String         @unique
+  tier             Tier           @default(FREE)
+  stripeCustomerId String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  pipelineRuns     PipelineRun[]
+  usageRecords     UsageRecord[]
+}
+
+model PipelineRun {
+  id            String        @id @default(cuid())
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
+  projectName   String
+  state         PipelineState @default(IDLE)
+  currentPhase  Int           @default(2)
+  revisionCount Int           @default(0)
+  verdict       String?
+  artifacts     Json          @default("{}")
+  tokenUsage    Json          @default("{}")
+  startedAt     DateTime      @default(now())
+  completedAt   DateTime?
+  messages      Message[]
+
+  @@index([userId, startedAt])
+}
+
+model Message {
+  id            String      @id @default(cuid())
+  pipelineRunId String
+  pipelineRun   PipelineRun @relation(fields: [pipelineRunId], references: [id])
+  role          String
+  content       String
+  phase         Int
+  createdAt     DateTime    @default(now())
+
+  @@index([pipelineRunId, createdAt])
+}
+
+model UsageRecord {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  pipelineRunId String
+  inputTokens   Int
+  outputTokens  Int
+  model         String
+  phase         Int
+  costCents     Int
+  createdAt     DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+enum Tier {
+  FREE
+  PRO
+  ENTERPRISE
+}
+
+enum PipelineState {
+  IDLE
+  RUNNING_PHASE
+  AWAITING_INPUT
+  AWAITING_DECISION
+  REVISION_LOOP
+  COMPLETE
+  FAILED
+}
